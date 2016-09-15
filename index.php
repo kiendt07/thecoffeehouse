@@ -11,10 +11,10 @@
             $page_title = "Homepage";
             include("includes/header.inc.html");
             require('includes/sql_connection.inc.php');
-        ?>  
+        ?>
 
         <?php
-            $query = "select p.prod_id, count(ol.orderlineid), image from products p, orderlines ol 
+            $query = "select p.prod_id, count(ol.orderlineid), image from products p, orderlines ol
                         where p.prod_id = ol.prod_id
                         group by p.prod_id
                         order by count desc limit 3";
@@ -30,7 +30,7 @@
             }
             //print_r($picture);
         ?>
-        
+
         <div class="container">
 
             <div class="row" id="myCarousel">
@@ -79,6 +79,8 @@
                 </div>
             </div>
 
+            <?php echo getcwd() ?>
+
         <div class="row">
             <div class="box">
 
@@ -98,13 +100,13 @@
                 </div> end of row -->
 
                 <div class="row">
-                    <?php 
+                    <?php
                         require('includes/sql_connection.inc.php');
                         $result = pg_query($DBC, "SELECT * FROM categories ORDER BY ctg_id ASC");
                         while ($row = pg_fetch_array($result)){
                             $id = $row['ctg_id'];
                             $category = $row['category'];
-                            echo 
+                            echo
                                 '<div class="col-lg-3 text-center">
                                     <a href="display_category.php?id='.$id.'">
                                         <h5>
@@ -138,18 +140,18 @@
                                 $description = $row['description'];
                                 $image = $row['image'];
                                 $avg_rating=$row['avg_rating'];
-                                echo 
+                                echo
                         '<div class="col-lg-4 feature text-center">
 
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <h4>
-                                                '.$name.'                           
-                                            </h4>   
+                                                '.$name.'
+                                            </h4>
                                             <hr>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row feature">
                                         <div class="col-lg-12">
                                             <img src="uploads/'.$image.'" alt="#" width="250px">
@@ -175,7 +177,7 @@
                                 echo '</div>'; // end stars
 
                                 echo    '<div class="row">
-                        
+
                         <a href="product.php?id='.$id.'" class="btn btn-default">Chi tiết</a>
                                                 <div class="form-group item-wrapper" id="form-'.$id.'">
                                                 <label class="title">Số Lượng:</label>
@@ -190,7 +192,7 @@
                         </div>';
 
                             } //end of while
-                        
+
 
                             pg_close($DBC);
 
@@ -205,14 +207,14 @@
                                 $description = $row['description'];
                                 $image = $row['image'];
                                 $avg_rating = $row['avg_rating'];
-                                echo 
+                                echo
                     '<div class="col-lg-4 feature text-center">
 
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <h4>
-                                                '.$name.'                           
-                                            </h4>   
+                                                '.$name.'
+                                            </h4>
                                             <hr>
                                         </div>
                                     </div>
@@ -248,7 +250,7 @@
                                                     <input type="hidden" class="item-name" value="' . $name . '" />
                                                     <input type="hidden" class="item-price" value="' . $price . '" />
                                                     <input type="number" class="text-center form-control item-quantity" placeholder="0">
-                                                    <button class="btn-default item-send-button-'.$id.'"> Send </button>    
+                                                    <button class="btn-default item-send-button-'.$id.'"> Send </button>
                                                   </div>
                                                     <button class="select-button btn-success btn-lg" value="'. $id .'"> Chọn </button>
                                                     <div id="test_alert-'.$id.'" class="alert alert-success" style="display: none;"></div>
@@ -264,10 +266,10 @@
 
         </div> <!-- end of row -->
 
-                
+
             </div>
 
-            
+
 
         </div>
         <!-- /.container -->
@@ -275,5 +277,3 @@
     </body>
 
     </html>
-
-
