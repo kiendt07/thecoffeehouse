@@ -1,0 +1,88 @@
+<body>
+
+    
+
+
+    <footer>
+        <div class="container">
+            <div class="row"> <br> </div>
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+           
+            </div>
+
+
+        </div>
+    </footer>
+
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Rating -->
+    <script src="js/bootstrap-rating-input.min.js" type="text/javascript"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <?php pg_close($DBC);?>
+</body>
+
+
+<script>
+$(document).ready(function(){
+    $('.item-wrapper').hide();
+    $('.select-button').click(function(){
+        var buttonId = $(this).val();
+        $('.form-group'+'#form-' + buttonId).toggle();
+
+
+        $('.item-send-button-'+ buttonId).click(function() {
+            var itemId = $(this).parent('.item-wrapper').find('.item-id').val();
+            var quantity = $(this).parent('.item-wrapper').find('.item-quantity').val();
+            var name = $(this).parent('.item-wrapper').find('.item-name').val();
+            var price = $(this).parent('.item-wrapper').find('.item-price').val();
+            if (quantity < 1) {
+                alert("Quantity Can't Be Zero");
+            } else {
+                $.post("ajax.php", {"id": itemId, "quantity": quantity, "productName": name, "productPrice": price}, function(response) {
+                    $('#test_alert-'+itemId).html(response).show().hide(5000);
+                });
+            }
+
+        });
+    });
+});     
+</script>
+
+
+
+<script>
+$(document).ready(function() {
+    $('#cart-button').click(function() {
+        var orderline_url = 'get_orderlines.php';
+        var data = {};
+        $.post(orderline_url,data, function (response){
+            $('.table-body').html(response);
+        });
+
+        $('.save-changes').click(function() {
+            //console.log($(this).attr('id'));
+            var checks = [];
+            $('input.check-item:checked').each(function() {
+                var x = $(this).attr('id').replace('check-', '');
+                checks.push(x);
+            });
+            console.log(checks);
+            $.each(checks, function(index, value) {
+                var y = value -1;
+                $.post("delete_items_cart.php",{'item-delete-index': y}, function () {
+                
+                });
+            });
+        });
+    });
+});
+</script>
