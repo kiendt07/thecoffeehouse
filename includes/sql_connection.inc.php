@@ -7,6 +7,6 @@ $password 	= "password=JrI60M9r-gKk2xcgNS7QtJempJ";
 $option = "sslmode=require";
 
 $url = $host + $database + $username + $port + $option + $password;
-
+var_dump($url);
 $DBC = pg_connect($url);
 ?>
