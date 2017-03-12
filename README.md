@@ -1,6 +1,6 @@
 # The Coffee House Project - thecoffeehouse
 
-** Final project of Database course at HUST **
+**Final project of Database course at HUST**
 ##### CREDIT BY NOSLEEP
 
 * Build by PHP vanilla
